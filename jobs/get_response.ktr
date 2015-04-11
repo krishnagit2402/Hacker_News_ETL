@@ -272,6 +272,9 @@
   <hop> <from>Select values</from><to>Table output</to><enabled>Y</enabled> </hop>
   <hop> <from>Get updated date</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Get Common Attrs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join</from><to>Table output 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Data Grid</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Compute URL</name>
@@ -315,7 +318,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Get Common Attrs</send_true_to>
-<send_false_to/>
+<send_false_to>Merge Join</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -684,6 +687,129 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>177</xloc>
       <yloc>99</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Table output 2</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ec2</connection>
+    <schema>public</schema>
+    <table>sta_responses</table>
+    <commit>&#x24;&#x7b;COMMIT_SIZE&#x7d;</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>id</column_name>
+          <stream_name>id</stream_name>
+        </field>
+        <field>
+          <column_name>response</column_name>
+          <stream_name>response</stream_name>
+        </field>
+        <field>
+          <column_name>updated</column_name>
+          <stream_name>updated</stream_name>
+        </field>
+        <field>
+          <column_name>by</column_name>
+          <stream_name>dummy_by</stream_name>
+        </field>
+        <field>
+          <column_name>url</column_name>
+          <stream_name>input_url</stream_name>
+        </field>
+        <field>
+          <column_name>request_for</column_name>
+          <stream_name>request_type</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>412</xloc>
+      <yloc>248</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>FULL OUTER</join_type>
+<step1>Filter rows</step1>
+<step2>Data Grid</step2>
+    <keys_1>
+    </keys_1>
+    <keys_2>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>398</xloc>
+      <yloc>171</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Data Grid</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>dummy_by</name>
+        <type/>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>_dead_profile</item> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>313</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
