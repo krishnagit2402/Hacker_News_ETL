@@ -12,6 +12,8 @@ git clone git@github.com:owocki/Hacker_News_ETL.git
 
 chkconfig crond on
 echo '
+#deploy on boot
+@reboot cd Hacker_News_ETL/; git pull origin master
 #run four threads of the worker at once
 @reboot  screen -dmS get_response bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_response.ktr | tee -a logs/get_response.log; done ";
 @reboot  screen -dmS get_response bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_response.ktr | tee -a logs/get_response.log; done ";
