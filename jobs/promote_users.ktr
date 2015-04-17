@@ -80,7 +80,7 @@
   </notepads>
   <connection>
     <name>ec2</name>
-    <server>52.11.159.116</server>
+    <server>54.187.191.146</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
     <database>hn</database>
