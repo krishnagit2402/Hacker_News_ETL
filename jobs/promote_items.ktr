@@ -281,7 +281,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>insert into sta_items &#x28;id,type,by,time,text,parent,kids,url,score,title,parts,descendants,updated,deleted,dead&#x29;&#xa;select &#xa;	id,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;type&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;by&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;time&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;text&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;parent&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;kids&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;url&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;score&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;title&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;parents&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;descendants&#x27;,&#xa;	updated,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;deleted&#x27;&#x29; is not null,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;dead&#x27;&#x29; is not null&#xa;from sta_responses where type &#x21;&#x3d; &#x27;user&#x27; &#x3b;&#xa;&#xa;&#xa;&#x2f;&#x2f;TRUNCATE TABLE sta_responses&#x3b;</sql>
+    <sql>-- TRUNCATE sta_items&#x3b;&#xa;&#xa;-- insert new rows into production table&#xa;do &#x24;&#x24;&#xa;  declare&#xa;    arow record&#x3b;&#xa;    foo varchar&#x28;50&#x29;&#x3b;&#xa;  begin&#xa;    for arow in&#xa;		select  id, count&#x28;1&#x29; from sta_responses where id IS NOT NULL group by id having count&#x28;1&#x29; &#x3e; 1&#xa;    loop&#xa;		delete from sta_responses where id &#x3d; arow.id&#x3b;&#xa;		insert into sta_queue &#x28;id, type, sid, bucket&#x29; VALUES &#x28; arow.id, &#x27;postid&#x27;, arow.id, arow.id &#x25; 100 &#x29;&#x3b;&#xa;    end loop&#x3b;&#xa;  end&#x3b;&#xa;&#x24;&#x24;&#x3b;&#xa;&#xa;&#xa;insert into sta_items &#x28;id,type,by,time,text,parent,kids,url,score,title,parts,descendants,updated,deleted,dead&#x29;&#xa;select &#xa;	id,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;type&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;by&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;time&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;text&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;parent&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;kids&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;url&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;score&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;title&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;parents&#x27;,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;descendants&#x27;,&#xa;	updated,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;deleted&#x27;&#x29; is not null,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;dead&#x27;&#x29; is not null&#xa;from sta_responses where type &#x21;&#x3d; &#x27;user&#x27; and id IS NOT NULL&#x3b;&#xa;&#xa;&#xa;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -292,7 +292,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>255</xloc>
-      <yloc>128</yloc>
+      <yloc>127</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
