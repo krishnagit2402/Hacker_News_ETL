@@ -4,5 +4,5 @@ git add .
 git stash
 git pull origin master
 
-crontab config/contab.txt
+crontab config/crontab.txt
 
