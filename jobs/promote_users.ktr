@@ -281,7 +281,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>insert into sta_users &#x28;id,created,delay,about,karma,submitted,updated,name&#x29;&#xa;select &#xa;	id,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;created&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;delay&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;about&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;karma&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;submitted&#x27;,&#xa;	updated,&#xa;	by&#xa;from sta_responses where type &#x3d; &#x27;user&#x27; limit 10&#x3b;&#xa;&#xa;</sql>
+    <sql>insert into sta_users &#x28;created,delay,about,karma,submitted,updated,name&#x29;&#xa;select &#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;created&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;delay&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;about&#x27;,&#xa;	&#x28;response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;karma&#x27;&#x29;&#x3a;&#x3a;int,&#xa;	response&#x3a;&#x3a;json-&#x3e;&#x3e;&#x27;submitted&#x27;,&#xa;	updated,&#xa;	by&#xa;from sta_responses where type &#x3d; &#x27;user&#x27;&#x3b;&#xa;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

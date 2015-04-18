@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>get_keyword_items</name>
+    <name>get_keyword_users</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -310,7 +310,7 @@
            <schema_name/>
            </partitioning>
     <connection>ec2</connection>
-    <sql>select id, sid from sta_queue where type &#x3d; &#x27;keyword_items&#x27; and bucket &#x3d; &#x28;random&#x28;&#x29; &#x2a; 100 &#x29;&#x3a;&#x3a;int &#x25; 100 LIMIT 1000&#xa;&#xa;</sql>
+    <sql>select id, sid from sta_queue where type &#x3d; &#x27;keyword_users&#x27; and bucket &#x3d; &#x28;random&#x28;&#x29; &#x2a; 100 &#x29;&#x3a;&#x3a;int &#x25; 100 LIMIT 1000&#xa;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -319,7 +319,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>325</xloc>
-      <yloc>224</yloc>
+      <yloc>223</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -338,15 +338,17 @@
     <connection>ec2</connection>
     <execute_each_row>Y</execute_each_row>
     <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>insert into fac_keyword_items &#x28;item_id, keyword&#x29;&#xa;select &#xa;	id,&#xa;	lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;text&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;from sta_items&#xa;where id &#x3d; &#x3f; and -1 &#x21;&#x3d; &#x3f;&#x3b;</sql>
-    <set_params>N</set_params>
+    <replace_variables>Y</replace_variables>
+    <quoteString>Y</quoteString>
+    <sql>insert into fac_keyword_users &#x28;user_id, keyword&#x29;&#xa;select &#xa;	id,&#xa;	lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;about&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;from sta_users&#xa;where -1 &#x21;&#x3d; &#x3f; and id &#x3d; &#x3f;&#x3b;</sql>
+    <set_params>Y</set_params>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
+       <argument><name>id</name></argument>
+       <argument><name>sid</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
