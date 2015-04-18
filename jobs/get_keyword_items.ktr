@@ -338,15 +338,17 @@
     <connection>ec2</connection>
     <execute_each_row>Y</execute_each_row>
     <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
+    <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>insert into fac_keyword_items &#x28;item_id, keyword&#x29;&#xa;select &#xa;	id,&#xa;	lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;text&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;from sta_items&#xa;where id &#x3d; &#x3f; and -1 &#x21;&#x3d; &#x3f;&#x3b;</sql>
-    <set_params>N</set_params>
+    <sql>insert into fac_keyword_items &#x28;item_id, keyword&#x29;&#xa;select id, word from &#x28;&#xa;select &#xa;	id,&#xa;	lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;text&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;from sta_items&#xa;where id &#x3d; &#x3f; and -1 &#x21;&#x3d; &#x3f;&#x29; as t2 where word &#x21;&#x3d; &#x27;&#x27; &#x3b;</sql>
+    <set_params>Y</set_params>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
+       <argument><name>id</name></argument>
+       <argument><name>sid</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>

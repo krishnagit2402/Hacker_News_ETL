@@ -340,7 +340,7 @@
     <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>Y</quoteString>
-    <sql>insert into fac_keyword_users &#x28;user_id, keyword&#x29;&#xa;select &#xa;	id,&#xa;	lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;about&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;from sta_users&#xa;where -1 &#x21;&#x3d; &#x3f; and id &#x3d; &#x3f;&#x3b;</sql>
+    <sql>insert into fac_keyword_users &#x28;user_id, keyword&#x29;&#xa;select id, word from &#x28;&#xa;select &#xa;	id,&#xa;	lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;about&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;from sta_users&#xa;where -1 &#x21;&#x3d; &#x3f; and id &#x3d; &#x3f;&#x29; where word &#x21;&#x3d; &#x27;&#x27;&#x3b;</sql>
     <set_params>Y</set_params>
     <insert_field/>
     <update_field/>
