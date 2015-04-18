@@ -281,7 +281,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>INSERT INTO sta_queue &#x28;id, type, sid, bucket, sid_text&#x29; &#xa;select NULL, &#x27;user&#x27;, NULL, &#x28;random&#x28;&#x29; &#x2a; 100 &#x29;&#x3a;&#x3a;int &#x25; 100, by FROM &#x28;&#xa;select distinct by from sta_items&#x29; as t1&#x3b;&#xa;</sql>
+    <sql>INSERT INTO sta_queue &#x28;id, type, sid, bucket, sid_text&#x29; &#xa;select row_number&#x28;&#x29; over &#x28; &#x29; as row_num, &#x27;user&#x27;, NULL, &#x28;random&#x28;&#x29; &#x2a; 100 &#x29;&#x3a;&#x3a;int &#x25; 100, by FROM &#x28;&#xa;select distinct by from sta_items&#x29; as t1&#x3b;&#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
