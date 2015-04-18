@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>promote_items</name>
+    <name>promote_users</name>
     <description/>
     <extended_description/>
     <trans_version/>
