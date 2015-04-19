@@ -4,3 +4,6 @@
 #run four threads of the worker at once
 @reboot  screen -dmS get_keyword_users bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_keyword_users.ktr | tee -a logs/get_keyword_users.log; done ";
 @reboot  screen -dmS get_keyword_items bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_keyword_items.ktr | tee -a logs/get_keyword_items.log; done ";
+1	*	*	*	*  screen -dmS clean_keywords bash -c "cd Hacker_News_ETL/; ./pan.sh -file=jobs/clean_keywords.ktr | tee -a logs/clean_keywords.log; ";
+1	*/12	*	*	*  screen -dmS build_fac_keyword_count bash -c "cd Hacker_News_ETL/; ./pan.sh -file=jobs/build_fac_keyword_count.ktr | tee -a logs/build_fac_keyword_count.log; ";
+1	1	*	*	*  screen -dmS build_dim_dates bash -c "cd Hacker_News_ETL/; ./pan.sh -file=jobs/build_dim_dates.ktr | tee -a logs/build_dim_dates.log; ";
