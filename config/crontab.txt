@@ -3,6 +3,4 @@
 @reboot cd Hacker_News_ETL/; sh bin/deploy.sh
 #run four threads of the worker at once
 @reboot  screen -dmS get_keyword_users bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_keyword_users.ktr | tee -a logs/get_keyword_users.log; done ";
-@reboot  screen -dmS get_keyword_users bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_keyword_users.ktr | tee -a logs/get_keyword_users.log; done ";
-@reboot  screen -dmS get_keyword_items bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_keyword_items.ktr | tee -a logs/get_keyword_items.log; done ";
 @reboot  screen -dmS get_keyword_items bash -c "cd Hacker_News_ETL/; while true; do ./pan.sh -file=jobs/get_keyword_items.ktr | tee -a logs/get_keyword_items.log; done ";
