@@ -267,38 +267,6 @@
   <hop> <from>Generate Rows</from><to>Insert fac keyword users</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Insert fac keyword users</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>ec2</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>do &#x24;&#x24;&#xa;  declare&#xa;    arow record&#x3b;&#xa;    foo varchar&#x28;50&#x29;&#x3b;&#xa;  begin&#xa;    for arow in&#xa;		select id, sid from sta_queue where type &#x3d; &#x27;keyword_users&#x27; and bucket &#x3d; &#x28;random&#x28;&#x29; &#x2a; 100 &#x29;&#x3a;&#x3a;int &#x25; 100 LIMIT 100&#xa;    loop&#xa;		delete from sta_queue where id &#x3d; arow.id&#x3b;&#xa;		insert into fac_keyword_users &#x28;user_id, keyword&#x29;&#xa;		select id, word from &#x28;&#xa;		select &#xa;			id,&#xa;			lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;about&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;		from sta_users&#xa;		where id &#x3d; arow.id &#x29; as t2 where word &#x21;&#x3d; &#x27;&#x27;&#x3b;&#xa;&#xa;    end loop&#x3b;&#xa;  end&#x3b;&#xa;&#x24;&#x24;&#x3b;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>631</xloc>
-      <yloc>198</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Generate Rows</name>
     <type>RowGenerator</type>
     <description/>
@@ -332,6 +300,38 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>505</xloc>
       <yloc>212</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Insert fac keyword users</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ec2</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>do &#x24;&#x24;&#xa;  declare&#xa;    arow record&#x3b;&#xa;    foo varchar&#x28;50&#x29;&#x3b;&#xa;  begin&#xa;    for arow in&#xa;		select id, sid from sta_queue where type &#x3d; &#x27;keyword_users&#x27; and bucket &#x3d; &#x28;random&#x28;&#x29; &#x2a; 100 &#x29;&#x3a;&#x3a;int &#x25; 100 LIMIT 100&#xa;    loop&#xa;		delete from sta_queue where id &#x3d; arow.id&#x3b;&#xa;		insert into fac_keyword_users &#x28;user_id, keyword&#x29;&#xa;		select id, word from &#x28;&#xa;		select &#xa;			id,&#xa;			lower&#x28;regexp_replace&#x28;unnest&#x28;string_to_array&#x28;&#x22;about&#x22;,&#x27; &#x27;&#x29;&#x29;,&#x27;&#x5b;&#x5e;a-zA-Z0-9&#x5d;&#x27;, &#x27;&#x27;, &#x27;g&#x27;&#x29;&#x29; as word&#xa;		from sta_users&#xa;		where id &#x3d; arow.sid &#x29; as t2 where word &#x21;&#x3d; &#x27;&#x27;&#x3b;&#xa;&#xa;    end loop&#x3b;&#xa;  end&#x3b;&#xa;&#x24;&#x24;&#x3b;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>631</xloc>
+      <yloc>198</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
