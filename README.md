@@ -1,6 +1,6 @@
 # Hacker_News_ETL
 
-A [Pentaho Kettle](http://community.pentaho.com/projects/data-integration/) / JAVAA Project to pull data from the hacker news API and put it into Pentaho Kettle / PostgresSQL
+A [Pentaho Kettle](http://community.pentaho.com/projects/data-integration/) / JAVA Project to pull data from the hacker news API and put it into Pentaho Kettle / PostgresSQL
 
 To learn more about this project (and to play with the data), check out https://github.com/owocki/hntrends or http://owocki.com/hntrends-google-trends-for-hacker-news/
 
